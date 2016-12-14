@@ -3,6 +3,13 @@ package br.com.caelum.agiletickets.models;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.Assert;
+
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.junit.Test;
 
 public class EspetaculoTest {
@@ -81,4 +88,29 @@ public class EspetaculoTest {
 		return sessao;
 	}
 	
+	@Test
+	public void deveriaCriarUmaUnicaSessaoQuandoInicioEFimMesmoDia(){
+		Espetaculo espetaculo = new Espetaculo();
+		espetaculo.setNome("RageAgainst");
+		
+		LocalDate inicio = new LocalDate(2016,12,14);
+		LocalDate fim = inicio; 
+		LocalTime horario = new LocalTime(21, 0);
+		Periodicidade periodicidade = Periodicidade.DIARIA;
+		
+		List<Sessao> sessoes = espetaculo.criaSessoes(inicio, fim, horario, periodicidade);
+		
+		
+		Assert.assertNotNull("Lista de sessões não pode ser nula", sessoes);
+		Assert.assertEquals("A lista deve ter apenas 1 item", 1, sessoes.size());
+		
+		Sessao sessao = sessoes.get(0);
+		
+		Assert.assertEquals("14/12/16", sessao.getDia());
+		Assert.assertEquals("21:00", sessao.getHora());
+		Assert.assertEquals(espetaculo, sessao.getEspetaculo());
+	}
+	
 }
+
+
