@@ -126,7 +126,7 @@ public class EspetaculoTest {
 		Assert.assertEquals("A lista deve ter 3 sessoes", 3, sessoes.size());
 		
 		AssertSessao.assertEquals("14/12/16","21:00", espetaculo, sessoes.get(0));
-		AssertSessao.assertEquals("19/12/16","21:00", espetaculo, sessoes.get(1));
+		AssertSessao.assertEquals("15/12/16","21:00", espetaculo, sessoes.get(1));
 		AssertSessao.assertEquals("16/12/16","21:00", espetaculo, sessoes.get(2));
 	}
 	
