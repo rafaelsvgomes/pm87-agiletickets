@@ -100,18 +100,22 @@ public class Espetaculo {
 			LocalTime horario, Periodicidade periodicidade) {
 		// ALUNO: Não apague esse metodo. Esse sim será usado no futuro! ;)
 		List<Sessao> sessoes = new ArrayList<Sessao>();
-		sessoes.add(getSessao(inicio, horario));
-
+		LocalDate dataAux = inicio;
+		while(dataAux.isBefore(fim) || dataAux.isEqual(fim)){
+			sessoes.add(criarSessao(dataAux, horario));
+			dataAux = dataAux.plusDays(1);
+		}
 		return sessoes;
 	}
 
-	private Sessao getSessao(LocalDate inicio, LocalTime horario) {
+	private Sessao criarSessao(LocalDate inicio, LocalTime horario) {
 		Sessao s = new Sessao();
 		s.setInicio(inicio.toDateTime(horario));
 		s.setEspetaculo(this);
 		s.setPreco(BigDecimal.TEN);
 		s.setTotalIngressos(100);
 		s.setIngressosReservados(10);
+		s.setDuracaoEmMinutos(null);
 
 		return s;
 	}

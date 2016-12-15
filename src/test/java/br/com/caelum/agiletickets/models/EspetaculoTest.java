@@ -111,6 +111,39 @@ public class EspetaculoTest {
 		Assert.assertEquals(espetaculo, sessao.getEspetaculo());
 	}
 	
+	@Test
+	public void deveriaCriarMaisSessoesQuandoInicioMenorQueFimPeriodicidadeDiaria(){
+		Espetaculo espetaculo = new Espetaculo();
+		LocalDate inicio = new LocalDate(2016,12,14);
+		LocalDate fim = new LocalDate(2016,12,16); 
+		LocalTime horario = new LocalTime(21, 0);
+		Periodicidade periodicidade = Periodicidade.DIARIA;
+		
+		List<Sessao> sessoes = espetaculo.criaSessoes(inicio, fim, horario, periodicidade);
+		
+		deveInformarListaInvalida(sessoes);
+		
+		Assert.assertEquals("A lista deve ter 3 sessoes", 3, sessoes.size());
+		
+		AssertSessao.assertEquals("14/12/16","21:00", espetaculo, sessoes.get(0));
+		AssertSessao.assertEquals("15/12/16","21:00", espetaculo, sessoes.get(1));
+		AssertSessao.assertEquals("16/12/16","21:00", espetaculo, sessoes.get(2));
+	}
+	
+
+	private void deveInformarListaInvalida(List<Sessao> sessoes) {
+		Assert.assertNotNull("Lista de sessões não pode ser nula", sessoes);
+	}
+	
+	
+	 static class AssertSessao {
+		public static void assertEquals(String dia, String hora, Espetaculo espetaculo, Sessao sessao) {
+			Assert.assertEquals(dia, sessao.getDia());
+			Assert.assertEquals(hora, sessao.getHora());
+			Assert.assertEquals(espetaculo, sessao.getEspetaculo());			
+		}
+	 }
+	
 }
 
 
