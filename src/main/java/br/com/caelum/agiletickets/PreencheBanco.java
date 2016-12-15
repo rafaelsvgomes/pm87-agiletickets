@@ -33,7 +33,7 @@ public class PreencheBanco {
 		Espetaculo espetaculo = new Espetaculo();
 		espetaculo.setEstabelecimento(estabelecimento);
 		espetaculo.setNome("Depeche Mode");
-		espetaculo.setTipo(TipoDeEspetaculo.SHOW);
+		espetaculo.setTipo(TipoDeEspetaculo.SHOW)
 
 		manager.persist(estabelecimento);
 		manager.persist(espetaculo);
